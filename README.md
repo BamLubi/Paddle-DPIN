@@ -20,7 +20,7 @@
 ## 模型组网
 
 模型有三个模块组成：Base Module、Combination Module、Interaction Module。Base Module模块用于将用户特征、商品特征和上下文特征融合。Interaction Module模块用于生成与商品内容无关的位置特征，其中使用到了Attention与Tramsformer机制。而Combination Module模块将交互后的物品特征与每个位置特征交互，产生出每个商品在每个位置的CTR。
-![model](img\model.png)
+![model](img/model.png)
 
 
 ## 实验结果
@@ -31,5 +31,5 @@
 
 注2：训练日志分别参考train-din.log和train-dpin.log
 
-![result](img\result.png)
+![result](img/result.png)
 
