@@ -55,9 +55,10 @@ class DygraphModel():
 
     # define metrics such as auc/acc
     def create_metrics(self):
-        metrics_list_name = ["AUC"]
+        metrics_list_name = ["AUC", "PAUC"]
         auc_metric = paddle.metric.Auc()
-        metrics_list = [auc_metric]
+        pauc_metric = PAUC()
+        metrics_list = [auc_metric, pauc_metric]
         return metrics_list, metrics_list_name
 
     # construct train forward phase
@@ -65,9 +66,12 @@ class DygraphModel():
         hist_item, hist_cat, target_item, target_cat, target_pos, position, label = self.create_feeds(batch_data, config)
 
         output = dy_model.forward(hist_item, hist_cat, target_item, target_cat, position)
+        
+        pauc_position = target_pos
+        
         output = paddle.squeeze(output)
         target_pos = paddle.unsqueeze(target_pos-1, axis=1)
-        line = paddle.arange(config.get("runner.train_batch_size", 32))
+        line = paddle.arange(config.get("runner.train_batch_size", 32), dtype="int32")
         line = paddle.unsqueeze(line, axis=1)
         target_pos = paddle.concat([line, target_pos], axis=1)
         output = paddle.gather_nd(output, target_pos)
@@ -78,6 +82,9 @@ class DygraphModel():
         output = paddle.concat([1-output, output], axis=1)
         label = paddle.unsqueeze(label, axis=1)
         metrics_list[0].update(preds=output, labels=label)
+        ## PAUC
+        K = config.get("hyper_parameters.K", 3)
+        metrics_list[1].update(preds=output, labels=label, position=pauc_position, K=K)
 
         print_dict = {'loss': loss}
         return loss, metrics_list, print_dict
@@ -99,3 +106,47 @@ class DygraphModel():
         label = paddle.unsqueeze(label, axis=1)
         metrics_list[0].update(preds=output, labels=label)
         return metrics_list, None
+
+
+class PAUC(paddle.metric.Metric):
+    def __init__(self):
+        super(PAUC, self).__init__()
+        self.auc_list = []
+        self.num_list = []
+        self.m = paddle.metric.Auc()
+    
+    def name(self):
+        return 'PAUC'
+    
+    def update(self, preds, labels, position, K):
+        if isinstance(preds, paddle.Tensor):
+            preds = preds.numpy()
+
+        if isinstance(labels, paddle.Tensor):
+            labels = labels.numpy()
+            
+        if isinstance(position, paddle.Tensor):
+            position = position.numpy()
+        
+        # calculate the number of impression
+        # calculate the auc of each position
+        for i in range(K):
+            ## the number of impression
+            self.num_list.append(len(position[position==i+1]))
+            ## the auc of each position
+            self.m.reset()
+            self.m.update(preds=preds[position==i+1], labels=labels[position==i+1])
+            self.auc_list.append(self.m.accumulate())  
+    
+    def accumulate(self):
+        sum = 0
+        _pauc = .0
+        for i in range(len(self.auc_list)):
+            sum += self.num_list[i]
+            _pauc += self.num_list[i] * self.auc_list[i]
+        return float(_pauc / sum) if sum != 0 else .0
+    
+    def reset(self):
+        self.auc_list = []
+        self.num_list = []
+        self.m.reset()
