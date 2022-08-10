@@ -76,13 +76,13 @@ def gen_DIN(num=5000000):
                 ## If his is not null, then add positive cases.
                 if line[4] == '1':
                     if len(his_ad) != 0:
-                        fo.writelines("{};{};{};{};{}\n".format(' '.join(his_ad), ' '.join(his_cat), line[1], line[2], line[4]))
+                        fo.writelines("{};{};{};{};{};{}\n".format(' '.join(his_ad), ' '.join(his_cat), line[1], line[2], line[3], line[4]))
                     his_ad.append(line[1])
                     his_cat.append(line[2])
                 ## If click = 0 and his is not null, then add negative cases.
                 if line[4] == '0':
                     if len(his_ad) != 0:
-                        fo.writelines("{};{};{};{};{}\n".format(' '.join(his_ad), ' '.join(his_cat), line[1], line[2], line[4]))
+                        fo.writelines("{};{};{};{};{};{}\n".format(' '.join(his_ad), ' '.join(his_cat), line[1], line[2], line[3], line[4]))
     fi.close()
     fo.close()
     print("---"*20)
