@@ -142,6 +142,7 @@ def gen_DPIN(num=5000000):
 
 if __name__ == '__main__':
     # Step 1. Preprocess the data download from KDD Cup 2012, Track 2
+    # !!!! Please make sure that you have downloaded the data from Kaggle !!!
     # The data input is stored at 'training.txt'
     # The processed data will be stored at 'train_phrase1.txt'
     preprocess()
