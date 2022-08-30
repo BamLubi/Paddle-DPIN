@@ -13,9 +13,6 @@
 
 from __future__ import print_function
 import numpy as np
-import io
-import random
-import paddle
 from paddle.io import IterableDataset
 
 
@@ -68,11 +65,11 @@ class RecDataset(IterableDataset):
                     position = [i for i in range(self.K)]
 
                     res = []
-                    res.append(np.array(hist_item_proc)) # [*, K, L]
-                    res.append(np.array(hist_cate_proc)) # [*, K, L]
-                    res.append(np.array(target_item)) # [*]
-                    res.append(np.array(target_cat)) # [*]
-                    res.append(np.array(target_pos)) # [*]
-                    res.append(np.array(position)) # [*, K]
+                    res.append(np.array(hist_item_proc).astype('int64')) # [*, K, L]
+                    res.append(np.array(hist_cate_proc).astype('int64')) # [*, K, L]
+                    res.append(np.array(target_item).astype('int64')) # [*]
+                    res.append(np.array(target_cat).astype('int64')) # [*]
+                    res.append(np.array(target_pos).astype('int64')) # [*]
+                    res.append(np.array(position).astype('int64')) # [*, K]
                     res.append(np.array(label).astype('float32')) # [*]
                     yield res

@@ -71,7 +71,7 @@ class DygraphModel():
         
         output = paddle.squeeze(output)
         target_pos = paddle.unsqueeze(target_pos-1, axis=1)
-        line = paddle.arange(config.get("runner.train_batch_size", 32), dtype="int32")
+        line = paddle.arange(config.get("runner.train_batch_size", 32), dtype="int64")
         line = paddle.unsqueeze(line, axis=1)
         target_pos = paddle.concat([line, target_pos], axis=1)
         output = paddle.gather_nd(output, target_pos)
