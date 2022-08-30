@@ -1,4 +1,4 @@
-[INFO]: current net device: eth0, ip: 10.156.26.154
+[INFO]: current net device: eth0, ip: 10.156.25.152
 [INFO]: paddle job envs:
 POD_IP=
 PADDLE_PORT=12345
@@ -12,8 +12,8 @@ NCCL_SOCKET_IFNAME=eth0
 PADDLE_IS_LOCAL=1
 OUTPUT_PATH=/root/paddlejob/workspace/output
 LOCAL_LOG_PATH=/root/paddlejob/workspace/log
-LOCAL_MOUNT_PATH=/mnt/code_20220810115416
-JOB_ID=jobpf-4211679-161674-20220810115405
+LOCAL_MOUNT_PATH=/mnt/code_20220830120534
+JOB_ID=jobpf-4211679-164972-20220830120526
 TRAINING_ROLE=TRAINER
 [INFO]: user command: bash run.sh
 [INFO]: start trainer
@@ -84,6 +84,10 @@ Archive:  PaddleRec_train.zip
   inflating: test_tipc/configs/deepfm/train_infer_python.txt  
    creating: test_tipc/configs/dlrm/
   inflating: test_tipc/configs/dlrm/train_infer_python.txt  
+   creating: test_tipc/configs/dpin/
+  inflating: test_tipc/configs/dpin/paddle_infer.py  
+  inflating: test_tipc/configs/dpin/to_static.py  
+  inflating: test_tipc/configs/dpin/train_infer_python.txt  
    creating: test_tipc/configs/dselect_k/
   inflating: test_tipc/configs/dselect_k/to_static.py  
   inflating: test_tipc/configs/dselect_k/train_infer_python.txt  
@@ -317,72 +321,72 @@ Archive:  PaddleRec_train.zip
   inflating: tools/utils/static_ps/time_helper.py  
   inflating: tools/utils/utils_single.py  
   inflating: tools/webserver.py      
-2022-08-10 11:54:19,467 - INFO - **************common.configs**********
-2022-08-10 11:54:19,468 - INFO - use_gpu: True, use_xpu: False, use_npu: False, use_visual: False, train_batch_size: 1024, train_data_dir: data, epochs: 30, print_interval: 1000, model_save_path: output_model_dpin
-2022-08-10 11:54:19,468 - INFO - **************common.configs**********
-W0810 11:54:19.469506   256 device_context.cc:447] Please NOTE: device: 0, GPU Compute Capability: 7.0, Driver API Version: 11.2, Runtime API Version: 10.1
-W0810 11:54:19.474613   256 device_context.cc:465] device: 0, cuDNN Version: 7.6.
-2022-08-10 11:54:30,010 - INFO - read data
-2022-08-10 11:54:30,010 - INFO - reader path:dpin_reader
-2022-08-10 11:54:31,046 - INFO - epoch: 0, batch_id: 0, AUC:0.550060, PAUC:0.485136, loss:0.44305593, avg_reader_cost: 0.00071 sec, avg_batch_cost: 0.00103 sec, avg_samples: 1.02400, ips: 998.02399 ins/s
-2022-08-10 11:56:03,598 - INFO - epoch: 0 done, AUC: 0.566959,PAUC: 0.548794,loss:0.25718093, epoch time: 93.59 s
-2022-08-10 11:56:03,989 - INFO - epoch: 1, batch_id: 0, AUC:0.628708, PAUC:0.650636, loss:0.2706635, avg_reader_cost: 0.00018 sec, avg_batch_cost: 0.00038 sec, avg_samples: 1.02400, ips: 2675.17703 ins/s
-2022-08-10 11:57:37,000 - INFO - epoch: 1 done, AUC: 0.587401,PAUC: 0.569212,loss:0.2552445, epoch time: 93.40 s
-2022-08-10 11:57:37,532 - INFO - epoch: 2, batch_id: 0, AUC:0.641102, PAUC:0.661413, loss:0.26688814, avg_reader_cost: 0.00023 sec, avg_batch_cost: 0.00052 sec, avg_samples: 1.02400, ips: 1956.63182 ins/s
-2022-08-10 11:59:09,802 - INFO - epoch: 2 done, AUC: 0.613270,PAUC: 0.591434,loss:0.24981087, epoch time: 92.80 s
-2022-08-10 11:59:10,263 - INFO - epoch: 3, batch_id: 0, AUC:0.661553, PAUC:0.661961, loss:0.26293528, avg_reader_cost: 0.00019 sec, avg_batch_cost: 0.00045 sec, avg_samples: 1.02400, ips: 2262.49176 ins/s
-2022-08-10 12:00:42,732 - INFO - epoch: 3 done, AUC: 0.633287,PAUC: 0.613021,loss:0.24462086, epoch time: 92.93 s
-2022-08-10 12:00:43,130 - INFO - epoch: 4, batch_id: 0, AUC:0.665459, PAUC:0.662670, loss:0.26067868, avg_reader_cost: 0.00018 sec, avg_batch_cost: 0.00039 sec, avg_samples: 1.02400, ips: 2633.68897 ins/s
-2022-08-10 12:02:16,121 - INFO - epoch: 4 done, AUC: 0.651233,PAUC: 0.633850,loss:0.24014774, epoch time: 93.39 s
-2022-08-10 12:02:16,606 - INFO - epoch: 5, batch_id: 0, AUC:0.666572, PAUC:0.663676, loss:0.2580771, avg_reader_cost: 0.00018 sec, avg_batch_cost: 0.00048 sec, avg_samples: 1.02400, ips: 2146.60998 ins/s
-2022-08-10 12:03:49,111 - INFO - epoch: 5 done, AUC: 0.670758,PAUC: 0.656327,loss:0.23660739, epoch time: 92.99 s
-2022-08-10 12:03:49,492 - INFO - epoch: 6, batch_id: 0, AUC:0.670975, PAUC:0.670905, loss:0.25544155, avg_reader_cost: 0.00019 sec, avg_batch_cost: 0.00037 sec, avg_samples: 1.02400, ips: 2748.32702 ins/s
-2022-08-10 12:05:25,304 - INFO - epoch: 6 done, AUC: 0.691304,PAUC: 0.679555,loss:0.23252067, epoch time: 96.19 s
-2022-08-10 12:05:25,738 - INFO - epoch: 7, batch_id: 0, AUC:0.686566, PAUC:0.687950, loss:0.2521095, avg_reader_cost: 0.00026 sec, avg_batch_cost: 0.00043 sec, avg_samples: 1.02400, ips: 2407.04223 ins/s
-2022-08-10 12:07:01,683 - INFO - epoch: 7 done, AUC: 0.711486,PAUC: 0.701456,loss:0.226964, epoch time: 96.38 s
-2022-08-10 12:07:02,122 - INFO - epoch: 8, batch_id: 0, AUC:0.709488, PAUC:0.709921, loss:0.24782799, avg_reader_cost: 0.00026 sec, avg_batch_cost: 0.00043 sec, avg_samples: 1.02400, ips: 2380.26130 ins/s
-2022-08-10 12:08:38,608 - INFO - epoch: 8 done, AUC: 0.729985,PAUC: 0.721212,loss:0.2206848, epoch time: 96.92 s
-2022-08-10 12:08:39,046 - INFO - epoch: 9, batch_id: 0, AUC:0.733355, PAUC:0.736196, loss:0.24291486, avg_reader_cost: 0.00026 sec, avg_batch_cost: 0.00043 sec, avg_samples: 1.02400, ips: 2388.83214 ins/s
-2022-08-10 12:10:16,434 - INFO - epoch: 9 done, AUC: 0.745996,PAUC: 0.737670,loss:0.21439953, epoch time: 97.83 s
-2022-08-10 12:10:16,871 - INFO - epoch: 10, batch_id: 0, AUC:0.754039, PAUC:0.755107, loss:0.2378146, avg_reader_cost: 0.00021 sec, avg_batch_cost: 0.00043 sec, avg_samples: 1.02400, ips: 2393.00474 ins/s
-2022-08-10 12:11:54,256 - INFO - epoch: 10 done, AUC: 0.758967,PAUC: 0.750664,loss:0.2084638, epoch time: 97.82 s
-2022-08-10 12:11:54,632 - INFO - epoch: 11, batch_id: 0, AUC:0.767485, PAUC:0.766601, loss:0.23328637, avg_reader_cost: 0.00021 sec, avg_batch_cost: 0.00037 sec, avg_samples: 1.02400, ips: 2794.30160 ins/s
-2022-08-10 12:13:31,496 - INFO - epoch: 11 done, AUC: 0.768845,PAUC: 0.760211,loss:0.20327139, epoch time: 97.24 s
-2022-08-10 12:13:31,865 - INFO - epoch: 12, batch_id: 0, AUC:0.775596, PAUC:0.775805, loss:0.22990847, avg_reader_cost: 0.00019 sec, avg_batch_cost: 0.00036 sec, avg_samples: 1.02400, ips: 2840.34638 ins/s
-2022-08-10 12:15:08,357 - INFO - epoch: 12 done, AUC: 0.775995,PAUC: 0.767067,loss:0.19938676, epoch time: 96.86 s
-2022-08-10 12:15:08,780 - INFO - epoch: 13, batch_id: 0, AUC:0.780601, PAUC:0.780496, loss:0.2276171, avg_reader_cost: 0.00019 sec, avg_batch_cost: 0.00041 sec, avg_samples: 1.02400, ips: 2472.02322 ins/s
-2022-08-10 12:16:47,385 - INFO - epoch: 13 done, AUC: 0.781321,PAUC: 0.772106,loss:0.19644271, epoch time: 99.03 s
-2022-08-10 12:16:47,767 - INFO - epoch: 14, batch_id: 0, AUC:0.783395, PAUC:0.782516, loss:0.22601417, avg_reader_cost: 0.00022 sec, avg_batch_cost: 0.00037 sec, avg_samples: 1.02400, ips: 2746.21125 ins/s
-2022-08-10 12:18:25,370 - INFO - epoch: 14 done, AUC: 0.785243,PAUC: 0.775887,loss:0.19438645, epoch time: 97.98 s
-2022-08-10 12:18:25,786 - INFO - epoch: 15, batch_id: 0, AUC:0.784825, PAUC:0.783367, loss:0.22492577, avg_reader_cost: 0.00029 sec, avg_batch_cost: 0.00041 sec, avg_samples: 1.02400, ips: 2507.77580 ins/s
-2022-08-10 12:20:03,047 - INFO - epoch: 15 done, AUC: 0.788363,PAUC: 0.778802,loss:0.19289212, epoch time: 97.68 s
-2022-08-10 12:20:03,613 - INFO - epoch: 16, batch_id: 0, AUC:0.785242, PAUC:0.782864, loss:0.22430564, avg_reader_cost: 0.00037 sec, avg_batch_cost: 0.00056 sec, avg_samples: 1.02400, ips: 1842.31282 ins/s
-2022-08-10 12:21:41,258 - INFO - epoch: 16 done, AUC: 0.790801,PAUC: 0.781146,loss:0.19120441, epoch time: 98.21 s
-2022-08-10 12:21:41,693 - INFO - epoch: 17, batch_id: 0, AUC:0.786196, PAUC:0.784153, loss:0.22370052, avg_reader_cost: 0.00020 sec, avg_batch_cost: 0.00043 sec, avg_samples: 1.02400, ips: 2403.57898 ins/s
-2022-08-10 12:23:18,182 - INFO - epoch: 17 done, AUC: 0.792723,PAUC: 0.782881,loss:0.18998317, epoch time: 96.92 s
-2022-08-10 12:23:18,558 - INFO - epoch: 18, batch_id: 0, AUC:0.787454, PAUC:0.786035, loss:0.22302018, avg_reader_cost: 0.00020 sec, avg_batch_cost: 0.00037 sec, avg_samples: 1.02400, ips: 2794.54159 ins/s
-2022-08-10 12:24:56,234 - INFO - epoch: 18 done, AUC: 0.794355,PAUC: 0.784520,loss:0.18888256, epoch time: 98.05 s
-2022-08-10 12:24:56,665 - INFO - epoch: 19, batch_id: 0, AUC:0.788513, PAUC:0.786829, loss:0.22262144, avg_reader_cost: 0.00020 sec, avg_batch_cost: 0.00042 sec, avg_samples: 1.02400, ips: 2426.28571 ins/s
-2022-08-10 12:26:32,664 - INFO - epoch: 19 done, AUC: 0.795783,PAUC: 0.785819,loss:0.18808112, epoch time: 96.43 s
-2022-08-10 12:26:33,095 - INFO - epoch: 20, batch_id: 0, AUC:0.788725, PAUC:0.787585, loss:0.2223262, avg_reader_cost: 0.00019 sec, avg_batch_cost: 0.00042 sec, avg_samples: 1.02400, ips: 2420.01346 ins/s
-2022-08-10 12:28:11,265 - INFO - epoch: 20 done, AUC: 0.796992,PAUC: 0.787030,loss:0.18731453, epoch time: 98.60 s
-2022-08-10 12:28:11,629 - INFO - epoch: 21, batch_id: 0, AUC:0.789784, PAUC:0.788072, loss:0.2219412, avg_reader_cost: 0.00019 sec, avg_batch_cost: 0.00036 sec, avg_samples: 1.02400, ips: 2884.45652 ins/s
-2022-08-10 12:29:49,561 - INFO - epoch: 21 done, AUC: 0.798128,PAUC: 0.788076,loss:0.1866755, epoch time: 98.29 s
-2022-08-10 12:29:49,934 - INFO - epoch: 22, batch_id: 0, AUC:0.790671, PAUC:0.789547, loss:0.22166128, avg_reader_cost: 0.00019 sec, avg_batch_cost: 0.00036 sec, avg_samples: 1.02400, ips: 2812.37934 ins/s
-2022-08-10 12:31:27,139 - INFO - epoch: 22 done, AUC: 0.799111,PAUC: 0.789107,loss:0.18617001, epoch time: 97.58 s
-2022-08-10 12:31:27,498 - INFO - epoch: 23, batch_id: 0, AUC:0.791128, PAUC:0.789842, loss:0.22135872, avg_reader_cost: 0.00019 sec, avg_batch_cost: 0.00035 sec, avg_samples: 1.02400, ips: 2920.35780 ins/s
-2022-08-10 12:33:05,653 - INFO - epoch: 23 done, AUC: 0.800036,PAUC: 0.789950,loss:0.18570822, epoch time: 98.51 s
-2022-08-10 12:33:06,020 - INFO - epoch: 24, batch_id: 0, AUC:0.791459, PAUC:0.789465, loss:0.22109751, avg_reader_cost: 0.00019 sec, avg_batch_cost: 0.00036 sec, avg_samples: 1.02400, ips: 2852.31112 ins/s
-2022-08-10 12:34:44,031 - INFO - epoch: 24 done, AUC: 0.800849,PAUC: 0.790802,loss:0.18532132, epoch time: 98.38 s
-2022-08-10 12:34:44,455 - INFO - epoch: 25, batch_id: 0, AUC:0.791956, PAUC:0.790336, loss:0.22092324, avg_reader_cost: 0.00025 sec, avg_batch_cost: 0.00042 sec, avg_samples: 1.02400, ips: 2465.98114 ins/s
-2022-08-10 12:36:21,958 - INFO - epoch: 25 done, AUC: 0.801634,PAUC: 0.791561,loss:0.18500683, epoch time: 97.93 s
-2022-08-10 12:36:22,446 - INFO - epoch: 26, batch_id: 0, AUC:0.792611, PAUC:0.790994, loss:0.22062194, avg_reader_cost: 0.00025 sec, avg_batch_cost: 0.00048 sec, avg_samples: 1.02400, ips: 2139.28910 ins/s
-2022-08-10 12:37:59,236 - INFO - epoch: 26 done, AUC: 0.802343,PAUC: 0.792323,loss:0.18462083, epoch time: 97.28 s
-2022-08-10 12:37:59,658 - INFO - epoch: 27, batch_id: 0, AUC:0.792691, PAUC:0.790663, loss:0.22038132, avg_reader_cost: 0.00025 sec, avg_batch_cost: 0.00041 sec, avg_samples: 1.02400, ips: 2479.35097 ins/s
-2022-08-10 12:39:37,535 - INFO - epoch: 27 done, AUC: 0.803015,PAUC: 0.792981,loss:0.18437698, epoch time: 98.30 s
-2022-08-10 12:39:37,961 - INFO - epoch: 28, batch_id: 0, AUC:0.793055, PAUC:0.790971, loss:0.2201979, avg_reader_cost: 0.00019 sec, avg_batch_cost: 0.00042 sec, avg_samples: 1.02400, ips: 2461.71688 ins/s
-2022-08-10 12:41:14,431 - INFO - epoch: 28 done, AUC: 0.803667,PAUC: 0.793687,loss:0.18396217, epoch time: 96.89 s
-2022-08-10 12:41:14,810 - INFO - epoch: 29, batch_id: 0, AUC:0.793306, PAUC:0.791445, loss:0.2199532, avg_reader_cost: 0.00020 sec, avg_batch_cost: 0.00037 sec, avg_samples: 1.02400, ips: 2771.01100 ins/s
-2022-08-10 12:42:53,552 - INFO - epoch: 29 done, AUC: 0.804274,PAUC: 0.794289,loss:0.18358593, epoch time: 99.12 s
+2022-08-30 12:05:37,358 - INFO - **************common.configs**********
+2022-08-30 12:05:37,358 - INFO - use_gpu: True, use_xpu: False, use_npu: False, use_visual: False, train_batch_size: 1024, train_data_dir: data, epochs: 30, print_interval: 1000, model_save_path: output_model_dpin
+2022-08-30 12:05:37,358 - INFO - **************common.configs**********
+W0830 12:05:37.359516   266 device_context.cc:447] Please NOTE: device: 0, GPU Compute Capability: 7.0, Driver API Version: 11.2, Runtime API Version: 10.1
+W0830 12:05:37.364995   266 device_context.cc:465] device: 0, cuDNN Version: 7.6.
+2022-08-30 12:05:47,815 - INFO - read data
+2022-08-30 12:05:47,815 - INFO - reader path:dpin_reader
+2022-08-30 12:05:48,971 - INFO - epoch: 0, batch_id: 0, AUC:0.573749, PAUC:0.517737, loss:0.63241696, avg_reader_cost: 0.00080 sec, avg_batch_cost: 0.00115 sec, avg_samples: 1.02400, ips: 893.05270 ins/s
+2022-08-30 12:07:43,340 - INFO - epoch: 0 done, AUC: 0.572962,PAUC: 0.542643,loss:0.25716507, epoch time: 115.52 s
+2022-08-30 12:07:43,682 - INFO - epoch: 1, batch_id: 0, AUC:0.616863, PAUC:0.607849, loss:0.27141705, avg_reader_cost: 0.00023 sec, avg_batch_cost: 0.00033 sec, avg_samples: 1.02400, ips: 3074.66393 ins/s
+2022-08-30 12:09:35,371 - INFO - epoch: 1 done, AUC: 0.586679,PAUC: 0.564457,loss:0.2558298, epoch time: 112.03 s
+2022-08-30 12:09:35,972 - INFO - epoch: 2, batch_id: 0, AUC:0.630621, PAUC:0.639166, loss:0.2687081, avg_reader_cost: 0.00039 sec, avg_batch_cost: 0.00059 sec, avg_samples: 1.02400, ips: 1729.24708 ins/s
+2022-08-30 12:11:26,840 - INFO - epoch: 2 done, AUC: 0.607582,PAUC: 0.583684,loss:0.25182173, epoch time: 111.47 s
+2022-08-30 12:11:27,380 - INFO - epoch: 3, batch_id: 0, AUC:0.643949, PAUC:0.642173, loss:0.26521292, avg_reader_cost: 0.00033 sec, avg_batch_cost: 0.00053 sec, avg_samples: 1.02400, ips: 1927.54412 ins/s
+2022-08-30 12:13:20,811 - INFO - epoch: 3 done, AUC: 0.626276,PAUC: 0.601876,loss:0.24627015, epoch time: 113.97 s
+2022-08-30 12:13:21,359 - INFO - epoch: 4, batch_id: 0, AUC:0.648610, PAUC:0.629983, loss:0.26355702, avg_reader_cost: 0.00029 sec, avg_batch_cost: 0.00054 sec, avg_samples: 1.02400, ips: 1899.31363 ins/s
+2022-08-30 12:15:13,929 - INFO - epoch: 4 done, AUC: 0.639748,PAUC: 0.617724,loss:0.24264617, epoch time: 113.12 s
+2022-08-30 12:15:14,447 - INFO - epoch: 5, batch_id: 0, AUC:0.648232, PAUC:0.632219, loss:0.26249647, avg_reader_cost: 0.00031 sec, avg_batch_cost: 0.00051 sec, avg_samples: 1.02400, ips: 2008.55398 ins/s
+2022-08-30 12:17:08,382 - INFO - epoch: 5 done, AUC: 0.652689,PAUC: 0.633375,loss:0.23938462, epoch time: 114.45 s
+2022-08-30 12:17:08,883 - INFO - epoch: 6, batch_id: 0, AUC:0.652357, PAUC:0.641046, loss:0.26001534, avg_reader_cost: 0.00029 sec, avg_batch_cost: 0.00049 sec, avg_samples: 1.02400, ips: 2076.20845 ins/s
+2022-08-30 12:19:03,051 - INFO - epoch: 6 done, AUC: 0.667745,PAUC: 0.651027,loss:0.23646349, epoch time: 114.67 s
+2022-08-30 12:19:03,481 - INFO - epoch: 7, batch_id: 0, AUC:0.656210, PAUC:0.646325, loss:0.25790805, avg_reader_cost: 0.00022 sec, avg_batch_cost: 0.00042 sec, avg_samples: 1.02400, ips: 2428.98202 ins/s
+2022-08-30 12:20:56,531 - INFO - epoch: 7 done, AUC: 0.685038,PAUC: 0.671267,loss:0.23348138, epoch time: 113.48 s
+2022-08-30 12:20:57,161 - INFO - epoch: 8, batch_id: 0, AUC:0.665440, PAUC:0.659995, loss:0.25525123, avg_reader_cost: 0.00022 sec, avg_batch_cost: 0.00062 sec, avg_samples: 1.02400, ips: 1647.58559 ins/s
+2022-08-30 12:22:49,150 - INFO - epoch: 8 done, AUC: 0.703285,PAUC: 0.691749,loss:0.22906236, epoch time: 112.62 s
+2022-08-30 12:22:49,869 - INFO - epoch: 9, batch_id: 0, AUC:0.686143, PAUC:0.684544, loss:0.2514738, avg_reader_cost: 0.00038 sec, avg_batch_cost: 0.00071 sec, avg_samples: 1.02400, ips: 1440.86530 ins/s
+2022-08-30 12:24:43,200 - INFO - epoch: 9 done, AUC: 0.721213,PAUC: 0.711306,loss:0.22323307, epoch time: 114.05 s
+2022-08-30 12:24:43,720 - INFO - epoch: 10, batch_id: 0, AUC:0.713036, PAUC:0.710435, loss:0.24653909, avg_reader_cost: 0.00029 sec, avg_batch_cost: 0.00051 sec, avg_samples: 1.02400, ips: 2002.62105 ins/s
+2022-08-30 12:26:35,718 - INFO - epoch: 10 done, AUC: 0.737844,PAUC: 0.728915,loss:0.21672365, epoch time: 112.52 s
+2022-08-30 12:26:36,267 - INFO - epoch: 11, batch_id: 0, AUC:0.737977, PAUC:0.740519, loss:0.24138403, avg_reader_cost: 0.00037 sec, avg_batch_cost: 0.00054 sec, avg_samples: 1.02400, ips: 1895.86786 ins/s
+2022-08-30 12:28:29,901 - INFO - epoch: 11 done, AUC: 0.751895,PAUC: 0.743349,loss:0.21075055, epoch time: 114.18 s
+2022-08-30 12:28:30,496 - INFO - epoch: 12, batch_id: 0, AUC:0.757356, PAUC:0.759672, loss:0.23645389, avg_reader_cost: 0.00024 sec, avg_batch_cost: 0.00059 sec, avg_samples: 1.02400, ips: 1744.58982 ins/s
+2022-08-30 12:30:22,679 - INFO - epoch: 12 done, AUC: 0.763115,PAUC: 0.754584,loss:0.20541075, epoch time: 112.78 s
+2022-08-30 12:30:23,175 - INFO - epoch: 13, batch_id: 0, AUC:0.770789, PAUC:0.772747, loss:0.2321261, avg_reader_cost: 0.00025 sec, avg_batch_cost: 0.00049 sec, avg_samples: 1.02400, ips: 2100.13608 ins/s
+2022-08-30 12:32:15,726 - INFO - epoch: 13 done, AUC: 0.771695,PAUC: 0.763023,loss:0.20170823, epoch time: 113.05 s
+2022-08-30 12:32:16,175 - INFO - epoch: 14, batch_id: 0, AUC:0.778953, PAUC:0.779396, loss:0.22914296, avg_reader_cost: 0.00024 sec, avg_batch_cost: 0.00044 sec, avg_samples: 1.02400, ips: 2326.03599 ins/s
+2022-08-30 12:34:10,044 - INFO - epoch: 14 done, AUC: 0.778162,PAUC: 0.769217,loss:0.19816345, epoch time: 114.32 s
+2022-08-30 12:34:10,535 - INFO - epoch: 15, batch_id: 0, AUC:0.783475, PAUC:0.784587, loss:0.22653693, avg_reader_cost: 0.00022 sec, avg_batch_cost: 0.00048 sec, avg_samples: 1.02400, ips: 2121.62213 ins/s
+2022-08-30 12:36:02,424 - INFO - epoch: 15 done, AUC: 0.782902,PAUC: 0.773736,loss:0.19566092, epoch time: 112.38 s
+2022-08-30 12:36:02,899 - INFO - epoch: 16, batch_id: 0, AUC:0.786540, PAUC:0.786992, loss:0.22466175, avg_reader_cost: 0.00029 sec, avg_batch_cost: 0.00047 sec, avg_samples: 1.02400, ips: 2198.16115 ins/s
+2022-08-30 12:37:55,907 - INFO - epoch: 16 done, AUC: 0.786447,PAUC: 0.777177,loss:0.19387323, epoch time: 113.48 s
+2022-08-30 12:37:56,399 - INFO - epoch: 17, batch_id: 0, AUC:0.787758, PAUC:0.787083, loss:0.22339244, avg_reader_cost: 0.00031 sec, avg_batch_cost: 0.00048 sec, avg_samples: 1.02400, ips: 2116.40842 ins/s
+2022-08-30 12:39:52,647 - INFO - epoch: 17 done, AUC: 0.789195,PAUC: 0.779764,loss:0.19235712, epoch time: 116.74 s
+2022-08-30 12:39:53,198 - INFO - epoch: 18, batch_id: 0, AUC:0.788513, PAUC:0.787748, loss:0.22261615, avg_reader_cost: 0.00022 sec, avg_batch_cost: 0.00054 sec, avg_samples: 1.02400, ips: 1887.84709 ins/s
+2022-08-30 12:41:46,310 - INFO - epoch: 18 done, AUC: 0.791434,PAUC: 0.781916,loss:0.19097602, epoch time: 113.66 s
+2022-08-30 12:41:46,773 - INFO - epoch: 19, batch_id: 0, AUC:0.789559, PAUC:0.788819, loss:0.22193453, avg_reader_cost: 0.00025 sec, avg_batch_cost: 0.00045 sec, avg_samples: 1.02400, ips: 2251.31072 ins/s
+2022-08-30 12:43:40,413 - INFO - epoch: 19 done, AUC: 0.793299,PAUC: 0.783708,loss:0.18985406, epoch time: 114.10 s
+2022-08-30 12:43:40,857 - INFO - epoch: 20, batch_id: 0, AUC:0.789989, PAUC:0.789724, loss:0.22162876, avg_reader_cost: 0.00023 sec, avg_batch_cost: 0.00044 sec, avg_samples: 1.02400, ips: 2350.14229 ins/s
+2022-08-30 12:45:34,963 - INFO - epoch: 20 done, AUC: 0.794866,PAUC: 0.785253,loss:0.18892688, epoch time: 114.55 s
+2022-08-30 12:45:35,384 - INFO - epoch: 21, batch_id: 0, AUC:0.790996, PAUC:0.790932, loss:0.22133224, avg_reader_cost: 0.00023 sec, avg_batch_cost: 0.00041 sec, avg_samples: 1.02400, ips: 2482.11637 ins/s
+2022-08-30 12:47:28,371 - INFO - epoch: 21 done, AUC: 0.796216,PAUC: 0.786560,loss:0.1882003, epoch time: 113.41 s
+2022-08-30 12:47:28,823 - INFO - epoch: 22, batch_id: 0, AUC:0.791711, PAUC:0.791942, loss:0.22109355, avg_reader_cost: 0.00024 sec, avg_batch_cost: 0.00044 sec, avg_samples: 1.02400, ips: 2311.50952 ins/s
+2022-08-30 12:49:22,781 - INFO - epoch: 22 done, AUC: 0.797418,PAUC: 0.787732,loss:0.18761636, epoch time: 114.41 s
+2022-08-30 12:49:23,421 - INFO - epoch: 23, batch_id: 0, AUC:0.792346, PAUC:0.792632, loss:0.22082065, avg_reader_cost: 0.00022 sec, avg_batch_cost: 0.00063 sec, avg_samples: 1.02400, ips: 1621.33156 ins/s
+2022-08-30 12:51:16,032 - INFO - epoch: 23 done, AUC: 0.798494,PAUC: 0.788803,loss:0.18715866, epoch time: 113.25 s
+2022-08-30 12:51:16,565 - INFO - epoch: 24, batch_id: 0, AUC:0.792194, PAUC:0.792176, loss:0.220596, avg_reader_cost: 0.00032 sec, avg_batch_cost: 0.00052 sec, avg_samples: 1.02400, ips: 1952.90676 ins/s
+2022-08-30 12:53:09,476 - INFO - epoch: 24 done, AUC: 0.799456,PAUC: 0.789780,loss:0.18669672, epoch time: 113.44 s
+2022-08-30 12:53:10,023 - INFO - epoch: 25, batch_id: 0, AUC:0.792274, PAUC:0.791721, loss:0.2203804, avg_reader_cost: 0.00024 sec, avg_batch_cost: 0.00054 sec, avg_samples: 1.02400, ips: 1901.65735 ins/s
+2022-08-30 12:55:05,641 - INFO - epoch: 25 done, AUC: 0.800330,PAUC: 0.790594,loss:0.18640506, epoch time: 116.16 s
+2022-08-30 12:55:06,422 - INFO - epoch: 26, batch_id: 0, AUC:0.793300, PAUC:0.792490, loss:0.22012496, avg_reader_cost: 0.00057 sec, avg_batch_cost: 0.00077 sec, avg_samples: 1.02400, ips: 1327.26094 ins/s
+2022-08-30 12:57:01,431 - INFO - epoch: 26 done, AUC: 0.801130,PAUC: 0.791399,loss:0.1859702, epoch time: 115.79 s
+2022-08-30 12:57:01,875 - INFO - epoch: 27, batch_id: 0, AUC:0.793916, PAUC:0.792846, loss:0.21986921, avg_reader_cost: 0.00023 sec, avg_batch_cost: 0.00044 sec, avg_samples: 1.02400, ips: 2349.12425 ins/s
+2022-08-30 12:58:58,725 - INFO - epoch: 27 done, AUC: 0.801879,PAUC: 0.792060,loss:0.18560195, epoch time: 117.29 s
+2022-08-30 12:58:59,214 - INFO - epoch: 28, batch_id: 0, AUC:0.794597, PAUC:0.793435, loss:0.2196867, avg_reader_cost: 0.00023 sec, avg_batch_cost: 0.00048 sec, avg_samples: 1.02400, ips: 2133.79323 ins/s
+2022-08-30 13:00:57,214 - INFO - epoch: 28 done, AUC: 0.802574,PAUC: 0.792813,loss:0.18522906, epoch time: 118.49 s
+2022-08-30 13:00:57,694 - INFO - epoch: 29, batch_id: 0, AUC:0.794975, PAUC:0.793725, loss:0.21946023, avg_reader_cost: 0.00025 sec, avg_batch_cost: 0.00047 sec, avg_samples: 1.02400, ips: 2178.16639 ins/s
+2022-08-30 13:02:52,569 - INFO - epoch: 29 done, AUC: 0.803209,PAUC: 0.793385,loss:0.18489727, epoch time: 115.35 s
 /mnt
 [INFO]: train job success!
