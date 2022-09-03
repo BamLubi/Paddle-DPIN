@@ -1,4 +1,5 @@
 from tqdm import tqdm
+import random
 
 def preprocess():
     ## preprocess origin dataset, filter out the required parameters
@@ -50,13 +51,14 @@ def preprocess():
 def gen_DIN(num=5000000):
     #$ Step 2. Generate dataset for model DIN(optional)
     fi = open("train_phrase1.txt", "r")
-    fo = open("train_din.txt", "w")
+    fo = open("train_din_tmp.txt", "w")
     user_id = ""
     max_ad = 0
     max_context = 0
     his_ad = []
     his_cat = []
-    print("Step 2. Generate dataset for model DIN(optional)...")
+    cnt_total = 0
+    print("Step 2.1 Generate dataset for model DIN(optional)...")
     for i in tqdm(range(num)):
         line = fi.readline()
         if not line:
@@ -76,15 +78,35 @@ def gen_DIN(num=5000000):
                 ## If his is not null, then add positive cases.
                 if line[4] == '1':
                     if len(his_ad) != 0:
+                        cnt_total += 1
                         fo.writelines("{};{};{};{};{};{}\n".format(' '.join(his_ad), ' '.join(his_cat), line[1], line[2], line[3], line[4]))
                     his_ad.append(line[1])
                     his_cat.append(line[2])
                 ## If click = 0 and his is not null, then add negative cases.
                 if line[4] == '0':
                     if len(his_ad) != 0:
+                        cnt_total += 1
                         fo.writelines("{};{};{};{};{};{}\n".format(' '.join(his_ad), ' '.join(his_cat), line[1], line[2], line[3], line[4]))
     fi.close()
     fo.close()
+    print("Total dataset lines : ", cnt_total)
+    print("Step 2.2 Partitioning the dataset for model DIN...")
+    fi = open("train_din_tmp.txt", "r")
+    fo_train = open("train_din.txt", "w")
+    fo_test = open("test_din.txt", "w")
+    cnt_train = 0
+    cnt_test = 0
+    random.seed(2022)
+    for i in tqdm(range(cnt_total)):
+        line = fi.readline()
+        if random.random() <= 0.2:
+            cnt_test += 1
+            fo_test.writelines(line)
+        else:
+            cnt_train += 1
+            fo_train.writelines(line)
+    print("Train dataset lines : ", cnt_train)
+    print("Test dataset lines : ", cnt_test)
     print("---"*20)
     print("Please remember the result as is shown below, \nyou have to copy them to file 'config.yaml' or 'config_bigdata.yaml'")
     print("max_item", max_ad)
@@ -95,14 +117,15 @@ def gen_DIN(num=5000000):
 def gen_DPIN(num=5000000):
     ## Step 3. Generate dataset for model DPIN
     fi = open("train_phrase1.txt", "r")
-    fo = open("train_dpin.txt", "w")
+    fo = open("train_dpin_tmp.txt", "w")
     user_id = ""
     max_ad = 0
     max_context = 0
     his_ad = []
     his_cat = []
     his_pos = []
-    print("Step 3. Generate dataset for model DPIN...")
+    cnt_total = 0
+    print("Step 3.1 Generating dataset for model DPIN...")
     for i in tqdm(range(num)):
         line = fi.readline()
         if not line:
@@ -123,6 +146,7 @@ def gen_DPIN(num=5000000):
                 ## If his is not null, then add positive cases.
                 if line[4] == '1':
                     if len(his_ad) != 0:
+                        cnt_total += 1
                         fo.writelines("{};{};{};{};{};{};{}\n".format(' '.join(his_ad), ' '.join(his_cat), ' '.join(his_pos), line[1], line[2], line[3], line[4]))
                     his_ad.append(line[1])
                     his_cat.append(line[2])
@@ -130,9 +154,28 @@ def gen_DPIN(num=5000000):
                 ## If click = 0 and his is not null, then add negative cases.
                 if line[4] == '0':
                     if len(his_ad) != 0:
+                        cnt_total += 1
                         fo.writelines("{};{};{};{};{};{};{}\n".format(' '.join(his_ad), ' '.join(his_cat), ' '.join(his_pos), line[1], line[2], line[3], line[4]))
     fi.close()
     fo.close()
+    print("Total dataset lines : ", cnt_total)
+    print("Step 3.2 Partitioning the dataset for model DPIN...")
+    fi = open("train_dpin_tmp.txt", "r")
+    fo_train = open("train_dpin.txt", "w")
+    fo_test = open("test_dpin.txt", "w")
+    cnt_train = 0
+    cnt_test = 0
+    random.seed(2022)
+    for i in tqdm(range(cnt_total)):
+        line = fi.readline()
+        if random.random() <= 0.2:
+            cnt_test += 1
+            fo_test.writelines(line)
+        else:
+            cnt_train += 1
+            fo_train.writelines(line)
+    print("Train dataset lines : ", cnt_train)
+    print("Test dataset lines : ", cnt_test)
     print("---"*20)
     print("Please remember the result as is shown below, \nyou have to copy them to file 'config.yaml' or 'config_bigdata.yaml'")
     print("max_item", max_ad)
@@ -145,13 +188,14 @@ if __name__ == '__main__':
     # !!!! Please make sure that you have downloaded the data from Kaggle !!!
     # The data input is stored at 'training.txt'
     # The processed data will be stored at 'train_phrase1.txt'
-    preprocess()
+    # preprocess()
     
     # Step 2. Generate dataset for model DIN(optional)
     # The processed data will be stored at 'train_din.txt'
-    # gen_DIN(5000000)
+    gen_DIN(5000000)
     
     # Step 3. Generate dataset for model DPIN
     # The processed data will be stored at 'train_dpin.txt'
-    gen_DPIN(5000000)
+    # gen_DPIN(5000000)
+    # gen_DPIN(6250000)
     
