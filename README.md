@@ -25,11 +25,11 @@
 
 ## 实验结果
 
-我们选择了数据集中的前500w条记录训练模型，对DIN和DPIN模型分别训练30轮左右。我们发现DPIN相较于DIN模型可以更快的收敛并且取得0.80左右的AUC分数，与本文中作者的实验结果0.799的AUC近似。而对于作者提出的新的评价指标PAUC而言，DPIN取得了0.794的分数，比DIN模型高了0.004。虽然使用的数据集不一样，但是可以证明模型的有效性。AUC、PAUC和Loss曲线如下图所示，发现DPIN模型可以快速收敛并稳定。
+我们选择了数据集中的前500w条记录训练模型，对DIN和DPIN模型分别训练20轮左右。我们发现DPIN相较于DIN模型可以更快的收敛并且在训练集上取得0.82左右的AUC分数。在测试集中，作者提出的模型最好成绩中AUC为0.66，PAUC为0.64，而对于用于比较的DIN模型来说，最好成绩的AUC为0.64，PAUC为0.63。虽然使用的数据集不一样，但是可以证明模型的有效性。AUC、PAUC和Loss曲线如下图所示，发现DPIN模型可以快速收敛并稳定。
 
 注1: DIN模型的实现参考的是飞桨模型库中的[DIN模型](https://github.com/PaddlePaddle/PaddleRec/blob/master/models/rank/din/README.md).
 
-注2: DIN模型使用的Embedding维度为64维,学习率0.85;DPIN模型使用的Embedding维度为8维,学习率0.05.
+注2: DIN模型使用的Embedding维度为64维,学习率0.85;DPIN模型使用的Embedding维度为64维,学习率0.5.
 
 注3: 训练日志分别参考trainer-din.log和trainer-dpin.log
 
