@@ -89,7 +89,7 @@ class DPINLayer(nn.Layer):
         
         # Position-wise Combination Module
         self.combination = nn.Sequential(
-            nn.Linear(in_features=128+64+self.emb_dim, out_features=128, weight_attr=nn.initializer.KaimingUniform()),
+            nn.Linear(in_features=128+self.d_model+self.emb_dim, out_features=128, weight_attr=nn.initializer.KaimingUniform()),
             nn.ReLU(),
             nn.Linear(in_features=128, out_features=1, weight_attr=nn.initializer.KaimingUniform()),
             nn.Sigmoid()
