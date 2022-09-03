@@ -19,19 +19,19 @@ runner:
   train_batch_size: 32
   epochs: 5
   print_interval: 100
-  #model_init_path: "output_model/0" # init model
+  #model_init_path: "output_model_dpin/0" # init model
   model_save_path: "output_model_dpin"
   infer_batch_size: 32
   infer_reader_path: "dpin_reader" # importlib format
   test_data_dir: "data"
   infer_load_path: "output_model_dpin"
-  infer_start_epoch: 4
+  infer_start_epoch: 0
   infer_end_epoch: 5
 
 # hyper parameters of user-defined network
 hyper_parameters:
-  is_sparse: True
-  embedding_dim: 8 # Embedding dimension
+  is_sparse: False
+  embedding_dim: 64 # Embedding dimension
   K: 3 # the number of position
   L: 10
   max_item: 4975
