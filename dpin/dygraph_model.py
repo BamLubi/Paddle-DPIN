@@ -94,9 +94,12 @@ class DygraphModel():
         hist_item, hist_cat, target_item, target_cat, target_pos, position, label = self.create_feeds(batch_data, config)
 
         output = dy_model.forward(hist_item, hist_cat, target_item, target_cat, position)
+        
+        pauc_position = target_pos
+        
         output = paddle.squeeze(output)
         target_pos = paddle.unsqueeze(target_pos-1, axis=1)
-        line = paddle.arange(config.get("runner.train_batch_size", 32))
+        line = paddle.arange(config.get("runner.train_batch_size", 32), dtype="int64")
         line = paddle.unsqueeze(line, axis=1)
         target_pos = paddle.concat([line, target_pos], axis=1)
         output = paddle.gather_nd(output, target_pos)
@@ -104,6 +107,9 @@ class DygraphModel():
         output = paddle.unsqueeze(output, axis=1)
         output = paddle.concat([1-output, output], axis=1)
         label = paddle.unsqueeze(label, axis=1)
+        ## PAUC
+        K = config.get("hyper_parameters.K", 3)
+        metrics_list[1].update(preds=output, labels=label, position=pauc_position, K=K)
         metrics_list[0].update(preds=output, labels=label)
         return metrics_list, None
 
