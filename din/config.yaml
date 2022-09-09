@@ -33,13 +33,13 @@ runner:
 hyper_parameters:
   optimizer:
     class: SGD
-    learning_rate_base_lr: 0.85
+    learning_rate_base_lr: 0.05
     strategy: async
   use_DataLoader: True
-  item_emb_size: 64
-  cat_emb_size: 64
+  item_emb_size: 8
+  cat_emb_size: 8
   is_sparse: True
-  item_count: 213426
-  cat_count: 13927
+  item_count: 455565
+  cat_count: 14616
   act: "sigmoid"
   distributed_embedding: 0
