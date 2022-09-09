@@ -84,6 +84,15 @@ class DPINLayer(nn.Layer):
         self.transformer = nn.Sequential(
             Transformer(self.d_model, self.h, self.K),
             Transformer(self.d_model, self.h, self.K),
+            Transformer(self.d_model, self.h, self.K),
+            Transformer(self.d_model, self.h, self.K),
+            Transformer(self.d_model, self.h, self.K),
+            Transformer(self.d_model, self.h, self.K),
+            Transformer(self.d_model, self.h, self.K),
+            Transformer(self.d_model, self.h, self.K),
+            Transformer(self.d_model, self.h, self.K),
+            Transformer(self.d_model, self.h, self.K),
+            Transformer(self.d_model, self.h, self.K),
             Transformer(self.d_model, self.h, self.K)
         )
         
