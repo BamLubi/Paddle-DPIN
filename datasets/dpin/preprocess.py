@@ -97,14 +97,26 @@ def gen_DIN(num=5000000):
     cnt_train = 0
     cnt_test = 0
     random.seed(2022)
+    train_set = []
+    test_set = []
     for i in tqdm(range(cnt_total)):
         line = fi.readline()
         if random.random() <= 0.2:
             cnt_test += 1
-            fo_test.writelines(line)
+            test_set.append(line)
         else:
             cnt_train += 1
-            fo_train.writelines(line)
+            train_set.append(line)
+    ## shuffle
+    print("Step 2.3 Shuffling the dataset...")
+    random.shuffle(train_set)
+    random.shuffle(test_set)
+    ## save to file
+    print("Step 2.4 Saving to file...")
+    for _, line in enumerate(tqdm(train_set)):
+        fo_train.writelines(line)
+    for _, line in enumerate(tqdm(test_set)):
+        fo_test.writelines(line)
     print("Train dataset lines : ", cnt_train)
     print("Test dataset lines : ", cnt_test)
     print("---"*20)
@@ -166,14 +178,26 @@ def gen_DPIN(num=5000000):
     cnt_train = 0
     cnt_test = 0
     random.seed(2022)
+    train_set = []
+    test_set = []
     for i in tqdm(range(cnt_total)):
         line = fi.readline()
         if random.random() <= 0.2:
             cnt_test += 1
-            fo_test.writelines(line)
+            test_set.append(line)
         else:
             cnt_train += 1
-            fo_train.writelines(line)
+            train_set.append(line)
+    ## shuffle
+    print("Step 3.3 Shuffling the dataset...")
+    random.shuffle(train_set)
+    random.shuffle(test_set)
+    ## save to file
+    print("Step 3.4 Saving to file...")
+    for _, line in enumerate(tqdm(train_set)):
+        fo_train.writelines(line)
+    for _, line in enumerate(tqdm(test_set)):
+        fo_test.writelines(line)
     print("Train dataset lines : ", cnt_train)
     print("Test dataset lines : ", cnt_test)
     print("---"*20)
@@ -192,10 +216,8 @@ if __name__ == '__main__':
     
     # Step 2. Generate dataset for model DIN(optional)
     # The processed data will be stored at 'train_din.txt'
-    gen_DIN(5000000)
+    # gen_DIN(50000000)
     
     # Step 3. Generate dataset for model DPIN
     # The processed data will be stored at 'train_dpin.txt'
-    # gen_DPIN(5000000)
-    # gen_DPIN(6250000)
-    
+    gen_DPIN(50000000)
