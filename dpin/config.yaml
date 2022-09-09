@@ -30,8 +30,8 @@ runner:
 
 # hyper parameters of user-defined network
 hyper_parameters:
-  is_sparse: False
-  embedding_dim: 64 # Embedding dimension
+  is_sparse: True
+  embedding_dim: 8 # Embedding dimension
   K: 3 # the number of position
   L: 10
   max_item: 4975

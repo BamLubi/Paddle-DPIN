@@ -30,15 +30,15 @@ runner:
 
 # hyper parameters of user-defined network
 hyper_parameters:
-  is_sparse: False
-  embedding_dim: 64 # Embedding dimension
+  is_sparse: True
+  embedding_dim: 8 # Embedding dimension
   K: 3 # the number of position
   L: 10
-  max_item: 213426
-  max_context: 13927
+  max_item: 455565
+  max_context: 14616
   d_model: 64
   h: 2
   optimizer:
     class: sgd
-    learning_rate: 0.5
+    learning_rate: 0.05
     strategy: async
